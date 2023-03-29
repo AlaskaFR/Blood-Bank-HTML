@@ -1,0 +1,219 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #f74545, #ed4e4e);
+}
+.container{
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+.container .title{
+  font-size: 25px;
+  font-weight: 500;
+  position: center;
+}
+
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #ed4e4e;
+}
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two,
+#dot-3:checked ~ .category label .three{
+   background: #ed4e4e;
+   border-color: #d9d9d9;
+ }
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
+ form .category{
+   display: flex;
+   width: 80%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+ }
+ form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+
+ form input[type="radio"]{
+   display: none;
+ }
+ form .button{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  margin: 70px 0;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+ form .button input{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #f74545, #ed4e4e);
+ }
+
+ .custom-select {
+    position: center;
+    display: inline-block;
+    font-size: 14px;
+    color: #888;
+    margin-top: 25px;
+  }
+  
+  .custom-select select {
+    display: block;
+    width: 250px;
+    min-height: 35px;
+    background: #cbe7ff;
+    border-radius: 3px;
+    border: 2px solid #f3215d;
+    outline: none;
+    padding: 0 20px 0 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+  }
+  
+  .custom-select::after {
+    content: '';
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-top-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+    border-radius: 2px;
+    position: center;
+    right: 10px;
+    bottom: 10px;
+  }
+  
+  .custom-select .selector-options {
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    background: #f3215d;
+    color: #fff;
+    border-radius: 4px;
+    z-index: 1;
+    width: 96%;
+    position: center;
+    left: 2%;
+    top: 35%;
+  }
+  
+  .custom-select .selector-options li {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .custom-select .selector-options li:hover {
+    background: #f3215d;
+  }
+  @media(max-width: 584px){
+    .container{
+     max-width: 100%;
+   }
+   form .user-details .input-box{
+       margin-bottom: 15px;
+       width: 100%;
+     }
+     form .category{
+       width: 100%;
+     }
+     .content form .user-details{
+       max-height: 300px;
+       overflow-y: scroll;
+     }
+     .user-details::-webkit-scrollbar{
+       width: 5px;
+     }
+   #dot-1:checked ~ .category label .one,
+   #dot-2:checked ~ .category label .two,
+   #dot-3:checked ~ .category label .three{
+      background:#1e70e2;
+      border-color: #f1f0ee;
+    }
+     }
+     @media(max-width: 459px){
+     .container .content .category{
+       flex-direction: column;
+     }
+   }

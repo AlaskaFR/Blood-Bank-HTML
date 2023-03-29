@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+	<style>
+		body {
+			font-family: 'Poppins',sans-serif;
+			margin: 0;
+			padding: 0;
+            background-color: #f74545;
+            position: center;
+		}
+		.container {
+			width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+            background-color: #ffffff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+		}
+		h1 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		form {
+            position: center;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+		label {
+			width: 45%;
+			margin-bottom: 10px;
+			font-size: 1.1rem;
+            position: relative;
+		}
+		input[type="text"], select {
+			width: 50%;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 1rem;
+		}
+        #blood-type {
+			width: 53%;
+		}
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			margin-bottom: 10px;
+			font-size: 1.1rem;
+		}
+		button {
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			color: #fff;
+			background-color: #007bff;
+			cursor: pointer;
+			font-size: 1.1rem;
+		}
+		.delete-button {
+			background-color: #dc3545;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Edit Account</h1>
+		<form>
+			<label for="first-name">First Name:</label>
+			<input type="text" id="first-name" name="first-name" required>
+			<label for="last-name">Last Name:</label>
+			<input type="text" id="last-name" name="last-name" required>
+			<label for="email">Email:</label>
+			<input type="text" id="email" name="email" required>
+			<label for="blood-type">Blood Type:</label>
+			<select id="blood-type" name="blood-type" required>
+				<option value=""></option>
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="O">O</option>
+                <option value="AB">AB</option>
+			</select>
+		</form>
+
+		<a href="file:///D:/Pt%20Facultate/AN%203%20SEM%202/LABS/PS/banca%20html/my%20account/account.html?name=John+Doe&email=johndoe%40example.com&password=********"><button>Save Changes</button></a>
+          
+	</div>
+</body>
+</html>

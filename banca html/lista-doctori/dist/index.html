@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctor List</title>
+    <style>
+      body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: 80% 10%;
+        font-family: 'Poppins',sans-serif;
+      }
+
+      table {
+        font-family: 'Poppins',sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #f5f5f5;
+      }
+      th, td {
+        font-family: 'Poppins',sans-serif;
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+        font-family: 'Poppins',sans-serif;
+        background-color: #f5f5f5;
+      }
+      .add-btn {
+        font-family: 'Poppins',sans-serif;
+        margin-bottom: 16px;
+      }
+      form input[type="text"], form select {
+        display: block;
+        margin-bottom: 8px;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-family: 'Poppins',sans-serif;
+      }
+      form input[type="submit"], form button {
+        font-family: 'Poppins',sans-serif;
+        margin-top: 8px;
+        padding: 8px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      form button {
+        font-family: 'Poppins',sans-serif;
+        margin-left: 8px;
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h1>Doctor List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Locations</th>
+          <th>Program</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Daniela</td>
+          <td>Sosoaca</td>
+          <td>Chiuzbaia</td>
+          <td>12:00</td>
+          <td>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Viorica</td>
+          <td>Dancila</td>
+          <td>Vaslui</td>
+          <td>12:30</td>
+          <td>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="add-btn">Add Doctor</button>
+    <form style="display: none;">
+      <input type="text" placeholder="First Name" />
+      <input type="text" placeholder="Last Name" />
+      <input type="text" placeholder="Locations" />
+      <select>
+        <option value="">Select Program</option>
+        <option value="08:00">12:00</option>
+        <option value="08:30">12:30</option>
+        <option value="09:00">12:00</option>
+        <option value="09:30">12:30</option>
+        <option value="10:00">12:00</option>
+        <option value="10:30">12:30</option>        
+        <option value="11:00">12:00</option>
+        <option value="11:30">12:30</option>
+        <option value="12:00">12:00</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">12:00</option>
+        <option value="13:30">12:30</option>
+      </select>
+      <input type="submit" value="Save" />
+      <button class="cancel-btn">Cancel</button>
+      <input type="hidden" name="edit-row" />
+    </form>
+    <script>
+      const addBtn = document.querySelector('.add-btn');
+      const form = document.querySelector('form');
+      const cancelBtn = form.querySelector('.cancel-btn');
+      const table = document.querySelector('table');
+      
+      addBtn.addEventListener('click', () => {
+        form.reset();
+        form.style.display = 'block';
+        addBtn.style.display = 'none';
+      });
+      
+      cancelBtn.addEventListener('click', () => {
+        form.style.display = 'none';
+        addBtn.style.display = 'block';
+      });
+      
+      const editBtns = document.querySelectorAll('.edit-btn');
+      const deleteBtns = document.querySelectorAll('.delete-btn');
+      
+      editBtns.forEach((editBtn) => {
+        editBtn.addEventListener('click', () => {
+          const row = editBtn.closest('tr');
+          const cells = row.querySelectorAll('td');
+          const firstName = cells[0].textContent;
+          const lastName = cells[1].textContent;
+          const locations = cells[2].textContent;
+          const program = cells[3].textContent;
+          const editRowInput = form.querySelector('input[name="edit-row"]');
+          const firstNameInput = form.querySelector('input[type="text"][placeholder="First Name"]');
+          const lastNameInput = form.querySelector('input[type="text"][placeholder="Last Name"]');
+          const locationsInput = form.querySelector('input[type="text"][placeholder="Locations"]');
+          const programSelect = form.querySelector('select');
+          editRowInput.value = row.rowIndex;
+          firstNameInput.value = firstName;
+          lastNameInput.value = lastName;
+          locationsInput.value = locations;
+          programSelect.value = program;
+          form.style.display = 'block';
+          addBtn.style.display = 'none';
+        });
+      });
+      
+      deleteBtns.forEach((deleteBtn) => {
+        deleteBtn.addEventListener('click', () => {
+          const row = deleteBtn.closest('tr');
+          row.parentNode.removeChild(row);
+        });
+      });
+      
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const firstNameInput = form.querySelector('input[type="text"][placeholder="First Name"]');
+        const lastNameInput = form.querySelector('input[type="text"][placeholder="Last Name"]');
+        const locationsInput = form.querySelector('input[type="text"][placeholder="Locations"]');
+        const programSelect = form.querySelector('select');
+        const editRowInput = form.querySelector('input[name="edit-row"]');
+        const rowIndex = editRowInput.value;
+        const row = rowIndex ? table.rows[rowIndex] : null;
+        if (row) {
+          row.cells[0].textContent = firstNameInput.value;
+          row.cells[1].textContent = lastNameInput.value;
+          row.cells[2].textContent = locationsInput.value;
+          row.cells[3].textContent = programSelect.value;
+        } else {
+          const newRow = table.insertRow();
+          const firstNameCell = newRow.insertCell();
+          const lastNameCell = newRow.insertCell();
+          const locationsCell = newRow.insertCell();
+          const programCell = newRow.insertCell();
+          const actionCell = newRow.insertCell();
+          firstNameCell.textContent = firstNameInput.value;
+          lastNameCell.textContent = lastNameInput.value;
+          locationsCell.textContent = locationsInput.value;
+          programCell.textContent = programSelect.value;
+          actionCell.innerHTML = '<button class="edit-btn">Edit</button><button class="delete-btn">Delete</button>';
+        }
+        form.style.display = 'none';
+        addBtn.style.display = 'block';
+      });
+
+    </script>
+  </body>
+</html>
+
