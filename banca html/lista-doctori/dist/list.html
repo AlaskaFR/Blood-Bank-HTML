@@ -40,7 +40,7 @@
         box-sizing: border-box;
         font-family: 'Poppins',sans-serif;
       }
-      form input[type="submit"], form button {
+      .saveBtn, form button {
         font-family: 'Poppins',sans-serif;
         margin-top: 8px;
         padding: 8px;
@@ -56,6 +56,7 @@
         background-color: #f44336;
       }
     </style>
+    <script src="../dist/script.js"></script>
   </head>
   <body>
     
@@ -66,135 +67,90 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Locations</th>
-          <th>Program</th>
+          <th>Email</th>
+          <th>Password</th>
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Daniela</td>
-          <td>Sosoaca</td>
-          <td>Chiuzbaia</td>
-          <td>12:00</td>
-          <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Viorica</td>
-          <td>Dancila</td>
-          <td>Vaslui</td>
-          <td>12:30</td>
-          <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </td>
-        </tr>
+      <tbody id = "doctorList">
       </tbody>
     </table>
     <button class="add-btn">Add Doctor</button>
-    <form style="display: none;">
-      <input type="text" placeholder="First Name" />
-      <input type="text" placeholder="Last Name" />
-      <input type="text" placeholder="Locations" />
-      <select>
-        <option value="">Select Program</option>
-        <option value="08:00">12:00</option>
-        <option value="08:30">12:30</option>
-        <option value="09:00">12:00</option>
-        <option value="09:30">12:30</option>
-        <option value="10:00">12:00</option>
-        <option value="10:30">12:30</option>        
-        <option value="11:00">12:00</option>
-        <option value="11:30">12:30</option>
-        <option value="12:00">12:00</option>
-        <option value="12:30">12:30</option>
-        <option value="13:00">12:00</option>
-        <option value="13:30">12:30</option>
-      </select>
-      <input type="submit" value="Save" />
-      <button class="cancel-btn">Cancel</button>
+    <form class="form-save" style="display: none;">
+      <input type="text" placeholder="First Name" class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Last Name"  class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Locations"  class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Email" class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Password"  class = 'input-edit-doctor'/>
+      <button class="saveBtn" onclick="onAddDoctorBtnClicked()">Save</button>
+      <button class="cancel-btn-save">Cancel</button>
+      <input type="hidden" name="edit-row" />
+    </form>
+    <form class="form-update" style="display: none;">
+      <input type="text" placeholder="First Name" class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Last Name"  class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Locations"  class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Email" class = 'input-edit-doctor'/>
+      <input type="text" placeholder="Password"  class = 'input-edit-doctor'/>
+      <button class="saveBtn">Save</button>
+      <button class="cancel-btn-update">Cancel</button>
       <input type="hidden" name="edit-row" />
     </form>
     <script>
       const addBtn = document.querySelector('.add-btn');
-      const form = document.querySelector('form');
-      const cancelBtn = form.querySelector('.cancel-btn');
+      const formSave = document.querySelector('.form-save');
+      const cancelBtnSave = formSave.querySelector('.cancel-btn-save');
+
       const table = document.querySelector('table');
       
       addBtn.addEventListener('click', () => {
-        form.reset();
-        form.style.display = 'block';
+        formSave.reset();
+        formSave.style.display = 'block';
         addBtn.style.display = 'none';
       });
       
-      cancelBtn.addEventListener('click', () => {
-        form.style.display = 'none';
+      cancelBtnSave.addEventListener('click', () => {
+        formSave.style.display = 'none';
         addBtn.style.display = 'block';
       });
-      
-      const editBtns = document.querySelectorAll('.edit-btn');
-      const deleteBtns = document.querySelectorAll('.delete-btn');
-      
-      editBtns.forEach((editBtn) => {
-        editBtn.addEventListener('click', () => {
-          const row = editBtn.closest('tr');
-          const cells = row.querySelectorAll('td');
-          const firstName = cells[0].textContent;
-          const lastName = cells[1].textContent;
-          const locations = cells[2].textContent;
-          const program = cells[3].textContent;
-          const editRowInput = form.querySelector('input[name="edit-row"]');
-          const firstNameInput = form.querySelector('input[type="text"][placeholder="First Name"]');
-          const lastNameInput = form.querySelector('input[type="text"][placeholder="Last Name"]');
-          const locationsInput = form.querySelector('input[type="text"][placeholder="Locations"]');
-          const programSelect = form.querySelector('select');
-          editRowInput.value = row.rowIndex;
-          firstNameInput.value = firstName;
-          lastNameInput.value = lastName;
-          locationsInput.value = locations;
-          programSelect.value = program;
-          form.style.display = 'block';
-          addBtn.style.display = 'none';
-        });
-      });
-      
-      deleteBtns.forEach((deleteBtn) => {
-        deleteBtn.addEventListener('click', () => {
-          const row = deleteBtn.closest('tr');
-          row.parentNode.removeChild(row);
-        });
-      });
-      
-      form.addEventListener('submit', (event) => {
+
+      const formUpdate = document.querySelector('.form-update');
+
+      const cancelBtnUpdate = formUpdate.querySelector('.cancel-btn-update');
+
+      formUpdate.addEventListener('submit', (event) => {
         event.preventDefault();
-        const firstNameInput = form.querySelector('input[type="text"][placeholder="First Name"]');
-        const lastNameInput = form.querySelector('input[type="text"][placeholder="Last Name"]');
-        const locationsInput = form.querySelector('input[type="text"][placeholder="Locations"]');
-        const programSelect = form.querySelector('select');
-        const editRowInput = form.querySelector('input[name="edit-row"]');
+        const firstNameInput = formUpdate.querySelector('input[type="text"][placeholder="First Name"]');
+        const lastNameInput = formUpdate.querySelector('input[type="text"][placeholder="Last Name"]');
+        const locationsInput = formUpdate.querySelector('input[type="text"][placeholder="Locations"]');
+        const emailInput = formUpdate.querySelector('input[type="text"][placeholder="Email"]');
+        const passwordInput = formUpdate.querySelector('input[type="text"][placeholder="Password"]');
+        const editRowInput = formUpdate.querySelector('input[name="edit-row"]');
         const rowIndex = editRowInput.value;
         const row = rowIndex ? table.rows[rowIndex] : null;
+        updateDoctor(firstNameInput.value, lastNameInput.value, locationsInput.value, emailInput.value, passwordInput.value, firstNameInput.id);
         if (row) {
           row.cells[0].textContent = firstNameInput.value;
           row.cells[1].textContent = lastNameInput.value;
           row.cells[2].textContent = locationsInput.value;
-          row.cells[3].textContent = programSelect.value;
+          row.cells[3].textContent = emailInput.value;
+          row.cells[4].textContent = passwordInput.value;
         } else {
           const newRow = table.insertRow();
           const firstNameCell = newRow.insertCell();
           const lastNameCell = newRow.insertCell();
           const locationsCell = newRow.insertCell();
-          const programCell = newRow.insertCell();
+          const emailCell = newRow.insertCell();
+          const passwordCell = newRow.insertCell();
           const actionCell = newRow.insertCell();
           firstNameCell.textContent = firstNameInput.value;
           lastNameCell.textContent = lastNameInput.value;
           locationsCell.textContent = locationsInput.value;
-          programCell.textContent = programSelect.value;
+          emailCell.textContent = emailInput.value;
+          passwordCell.textContent = passwordInput.value;
           actionCell.innerHTML = '<button class="edit-btn">Edit</button><button class="delete-btn">Delete</button>';
         }
-        form.style.display = 'none';
+        formUpdate.style.display = 'none';
         addBtn.style.display = 'block';
       });
 

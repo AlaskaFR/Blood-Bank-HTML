@@ -217,3 +217,19 @@ form .input-box span.details{
        flex-direction: column;
      }
    }
+
+   .toast {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .toast.show {
+    opacity: 1;
+  }

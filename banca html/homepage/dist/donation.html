@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Donate Blood</title>
     <link rel="stylesheet" href="./style.css">
+	<script src="./script.js"></script>
   </head>
   <body>
 	<style>
@@ -133,29 +134,13 @@
 	</style>
 	<div class="container">
 		<h1>Donate Blood</h1>
-		<form>
+		<form>    
 			<label for="location">Location:</label>
-			<select id="location" name="location" required>
-                <option value=""></option>
-                <option value="Chiuzbaia">Chiuzbaia</option>
-                <option value="Baia Mare">Baia Mare</option>
-                <option value="Busag">Busag</option>
-                <option value="Cicarlau">Cicarlau</option>
-                <option value="Firiza">Firiza</option>
-                <option value="Mirau">Mirau</option>
-                <option value="Dej">Dej</option>
-                <option value="Falticeni">Falticeni</option>
-                <option value="Pui">Pui</option>
+			<select id="location" name="location" onchange="onLocationChange()" required>
             </select>
     
             <label for="doctor">Doctor:</label>
-            <select id="doctor" name="doctor" required>
-                <option value=""></option>
-                <option value="Dr. Johnson">Dr. Stefanescu</option>
-                <option value="Dr. Smith">Dr. Marinescu</option>
-                <option value="Dr. Brown">Dr. Sosoaca</option>
-                <option value="Dr. Davis">Dr. Dancila</option>
-                <option value="Dr. Wilson">Dr. Basescu</option>
+            <select id="doctor" name="doctor" onchange="onDoctorChange()" required>
             </select>
     
             <label for="date">Date:</label>
@@ -174,9 +159,7 @@
                 <option value="16:00">16:00</option>
             </select>
     
-            <button type="submit" onclick="window.location.href='file:///D:/Pt%20Facultate/AN%203%20SEM%202/LABS/PS/banca%20html/homepage/dist/index.html'">Donate</button>
-
-            
+            <button type="submit" onclick="onSubmitBtnClicked(event)">Donate</button>
         </form>
     </div>
     

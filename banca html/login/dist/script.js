@@ -1,42 +1,44 @@
-document.querySelectorAll('.custom-select').forEach(setupSelector);
 
-function setupSelector(selector) {
-  selector.addEventListener('change', e => {
-    console.log('changed', e.target.value)
+function onLoginBtnClicked() {
+  let email = document.getElementsByClassName("input-login-form")[0].value;
+  let password = document.getElementsByClassName('input-login-form')[1].value;
+  const url = `http://localhost:8081/user/login?email=${email}&password=${password}`;
+  fetch(url, {
+    method: 'GET',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json '
+    },
   })
+    .then(response =>{
+      if(response.headers.get('Content-Length') !== '0'){
+        return response.json();
+      }
+      else{
+        showToast("Incorrect credentials provided!");
+        return;
+      }
+    })
+    .then(data => {
+      localStorage.setItem("loggedUser", data.id); //se seteaza in localstorafe id user
+      if(data.role === 2){
+        window.location.href = "../../homepage/dist/loggedDonor.html";
+      }
+      else if(data.role === 1){
+        console.log("I'm a doctor");
+      }
+      else if(data.role === 0){
+        window.location.href = "../../lista-doctori/dist/list.html";
+      }
+    });
 
-  selector.addEventListener('mousedown', e => {
-    if(window.innerWidth >= 420) {// override look for non mobile
-      e.preventDefault();
+}
 
-      const select = selector.children[0];
-      const dropDown = document.createElement('ul');
-      dropDown.className = "selector-options";
-
-      [...select.children].forEach(option => {
-        const dropDownOption = document.createElement('li');
-        dropDownOption.textContent = option.textContent;
-
-        dropDownOption.addEventListener('mousedown', (e) => {
-          e.stopPropagation();
-          select.value = option.value;
-          selector.value = option.value;
-          select.dispatchEvent(new Event('change'));
-          selector.dispatchEvent(new Event('change'));
-          dropDown.remove();
-        });
-
-        dropDown.appendChild(dropDownOption);   
-      });
-
-      selector.appendChild(dropDown);
-
-      // handle click out
-      document.addEventListener('click', (e) => {
-        if(!selector.contains(e.target)) {
-          dropDown.remove();
-        }
-      });
-    }
-  });
+function showToast(message) { //mesajul de credentiale gresite
+  var toast = document.getElementById("toast");
+  toast.innerHTML = message;
+  toast.classList.add("show");
+  setTimeout(function(){
+    toast.classList.remove("show");
+  }, 3000);
 }

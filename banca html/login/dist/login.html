@@ -14,6 +14,7 @@
   </head>
   <body>
     <div class="container">
+      <div id="toast" class="toast"></div>
       <div class="title">Login</div>
       <div class="content">
         <form action="file:///D:/Pt%20Facultate/AN%203%20SEM%202/LABS/PS/banca%20html/homepage/dist/index.html" method="GET">
@@ -21,11 +22,12 @@
           <div class="user-details">
             <div class="input-box">
               <span class="details">Email</span>
-              <input type="text" placeholder="Enter your email" required />
+              <input class="input-login-form" type="text" placeholder="Enter your email" required />
             </div>
             <div class="input-box">
               <span class="details">Password</span>
               <input
+                class="input-login-form"
                 type="password"
                 placeholder="Enter your password"
                 required
@@ -33,7 +35,7 @@
             </div>
           </div>
           <div class="button">
-            <input type="submit" value="Login" />
+            <input type="button" onclick="onLoginBtnClicked()" value="Login" />
           </div>
         </form>
       </div>
