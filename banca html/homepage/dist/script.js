@@ -1,6 +1,47 @@
 window.onload = function () { //se apeleaza cand intru in pagina de appoinment
     getAllDoctors();
     getAllLocations();
+    onHourChange();
+}
+
+function onHourChange(){
+    const selectHour = document.getElementById('hour');
+    const emptyOptionHour = document.createElement('option');
+    emptyOptionHour.text = "";
+    selectHour.innerHTML = '';
+    selectHour.appendChild(emptyOptionHour);
+    let urlGetHours = `http://localhost:8081/appointment/hours`;
+    
+    const select = document.getElementById('doctor');
+    const selectedDoctor = select.selectedOptions[0];
+
+    if(selectedDoctor.text !== ""){
+        try{
+            const date = document.getElementById('date').value;
+            const dateObject = new Date(date);
+            const isoDate = dateObject.toISOString().substr(0, 10); //transformam data in string YYYY-MM-DD
+            urlGetHours = `http://localhost:8081/appointment/hours?doctorId=${selectedDoctor.id}&date=${isoDate}`
+        }
+        catch(e){
+            urlGetHours = `http://localhost:8081/appointment/hours?doctorId=${selectedDoctor.id}`
+        }
+    }
+
+    fetch(urlGetHours, {
+        method: 'GET',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json '
+        },
+    })
+        .then(response => response.json())
+        .then(hours => {
+            hours.forEach(hour => {
+                const hourOption = document.createElement('option');
+                hourOption.text = hour;
+                selectHour.appendChild(hourOption);
+            })
+        })
 }
 
 function getAllDoctors(){
@@ -82,6 +123,7 @@ function onLocationChange(){ //viceversa same logic
 }
 
 function onDoctorChange(){ // se trigger cand se alege un doctor din dropdown list
+    onHourChange();
     const select = document.getElementById('doctor');
     const selectedDoctor = select.selectedOptions[0]; 
     const selectLocation = document.getElementById('location');
@@ -127,3 +169,41 @@ function onSubmitBtnClicked(event) {
     })
     window.location.href = "../../homepage/dist/loggedDonor.html"; //redirectionare 
 }
+
+function getBadge() {
+    const donorId = localStorage.getItem("loggedUser"); // ID-ul utilizatorului logat
+  
+    // Apelăm backend-ul pentru a obține badge-ul utilizatorului
+    fetch(`http://localhost:8081/badge/${donorId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Actualizăm imaginea și numele badge-ului în HTML
+      const badgeImage = document.getElementById('badge-image');
+      const badgeName = document.getElementById('badge-name');
+      
+      badgeImage.src = data.imageUrl;
+      badgeName.textContent = data.name;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  
+  // Apelăm funcția pentru a obține și afișa badge-ul utilizatorului
+  getBadge();
+
+  <script>
+  // Get the badge image URL from the backend or set it manually
+  var badgeImageUrl = "silver.png";
+
+  // Update the badge image source
+  var badgeImage = document.getElementById("badge-image");
+  badgeImage.src = badgeImageUrl;
+</script>
+  
+  

@@ -25,7 +25,7 @@ function onLoginBtnClicked() {
         window.location.href = "../../homepage/dist/loggedDonor.html";
       }
       else if(data.role === 1){
-        console.log("I'm a doctor");
+        window.location.href = "../../my account/doctoraccount.html";
       }
       else if(data.role === 0){
         window.location.href = "../../lista-doctori/dist/list.html";

@@ -104,6 +104,65 @@
         </div>
 
     </main>
+ 
+<!-- Badge Section -->
+<section class="badge-section">
+    <h2 class="section-title">Your Badge</h2>
+    <div class="badge-container">
+        <img src="bronze.png" alt="Badge Image" id="badge-image">
+
+    </div>
+  </section>
+
+  <script>
+    // Get the badge image URL from the backend or set it manually
+    var badgeImageUrl = "silver.png";
+  
+    // Update the badge image source
+    var badgeImage = document.getElementById("badge-image");
+    badgeImage.src = badgeImageUrl;
+  </script>
+  
+  <script>
+    // Get the badge type from the backend or set it manually
+    var badgeType = "BRONZE";
+  
+    // Set the badge image URL based on the badge type
+    var badgeImageUrl;
+    if (badgeType === "BRONZE") {
+      badgeImageUrl = "bronze.png";
+    } else if (badgeType === "SILVER") {
+      badgeImageUrl = "silver.png";
+    } else if (badgeType === "GOLD") {
+      badgeImageUrl = "gold.png";
+    }
+  
+    // Update the badge image source
+    var badgeImage = document.getElementById("badge-image");
+    badgeImage.src = badgeImageUrl;
+  </script>
+  
+      
+
+  <!-- Wall of Fame Section -->
+  <section class="wall-of-fame">
+    <h2 class="section-title">Wall of Fame</h2>
+    <ul class="users-list">
+      <li>
+        <div class="user-profile">
+          <img src="user-image-url" alt="User Image">
+          <!-- <p class="user-name">User Name</p> -->
+        </div>
+        <!-- <p class="user-rank">Rank: User Rank</p> -->
+      </li>
+      <!-- Repeat for other users -->
+    </ul>
+  </section>
+
+  <!-- User Rank Section -->
+  <section class="user-rank">
+    <h3>Your Rank: 12</h3>
+  </section>
 
     
 

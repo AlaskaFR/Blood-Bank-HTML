@@ -228,6 +228,7 @@ button {
 }
 
 
+
 /* -------------------footer----------- */
 .site-footer
 {
@@ -482,4 +483,67 @@ a{
   0% { text-shadow: none; }
   50% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #f74545, 0 0 70px #f74545, 0 0 80px #f74545, 0 0 100px #f74545; }
   100% { text-shadow: none; }
+}
+
+
+/* Clasament */
+.user-rank {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.user-rank h3 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Badge utilizator */
+.user-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.user-badge img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-badge .badge-info {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Wall of Fame */
+.wall-of-fame {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wall-of-fame .user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.wall-of-fame .user-profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.wall-of-fame .user-profile .user-name {
+  font-size: 18px;
+  margin: 0;
+}
+
+.wall-of-fame .user-profile .user-rank {
+  font-size: 14px;
+  margin: 0;
 }

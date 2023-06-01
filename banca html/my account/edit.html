@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Edit Account</title>
     <link rel="stylesheet" href="./style.css">
+	<script src="./edit.js"></script>
   </head>
   <body>
 	<style>
@@ -98,8 +99,16 @@
 			</select>
 		</form>
 
-		<a href="account.html"><button>Save Changes</button></a>
-          
+		<button id="save-button" onclick="saveChanges()">Save Changes</button>
+
+		<script>
+			function saveChanges() {
+				// Perform the save operation here
+
+				 // Redirect to account.html
+				window.location.href = 'account.html';
+			}
+		</script>
 	</div>
 </body>
 </html>

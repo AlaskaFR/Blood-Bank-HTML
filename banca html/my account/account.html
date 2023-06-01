@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My Account</title>
     <link rel="stylesheet" href="./style.css">
+	<script src="./userscript.js"></script>
   </head>
   <body>
 	<style>
@@ -54,11 +55,27 @@
         #blood-type {
 			width: 53%;
 		}
-		ul {
-			list-style: none;
-			margin: 0;
-			padding: 0;
+		.appointments-container {
+			margin-top: 20px;
 		}
+	
+		.appointments-container h1 {
+			margin-bottom: 10px;
+		}
+	
+		.appointments-container table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 10px;
+		}
+	
+		.appointments-container th,
+		.appointments-container td {
+			padding: 8px;
+			border: 1px solid #ccc;
+			font-size: 1rem;
+		}
+	
 		li {
 			margin-bottom: 10px;
 			font-size: 1.1rem;
@@ -80,34 +97,39 @@
 </head>
 <body>
 	<div class="container">
-		<h1>My Account</h1>
-		<form>
-			<label for="first-name">First Name:</label>
-			<input type="text" id="first-name" name="first-name" required>
-			<label for="last-name">Last Name:</label>
-			<input type="text" id="last-name" name="last-name" required>
-			<label for="email">Email:</label>
-			<input type="text" id="email" name="email" required>
-			<label for="blood-type">Blood Type:</label>
-			<select id="blood-type" name="blood-type" required>
-				<option value=""></option>
-				<option value="A">A</option>
-				<option value="B">B</option>
-				<option value="O">O</option>
-                <option value="AB">AB</option>
-			</select>
-		</form>
-		<h2>My Appointments:</h2>
-		<ul>
-			<li>Appointment 1 - 12:00</li>
-			<li>Appointment 2 - 13:00</li>
-			<li>Appointment 3 - 14:00</li>
-		</ul>
+		<!-- <h1>My Account</h1>
+		<div id="user-info">
+		  <p><strong>First Name:</strong> <span id="firstName"></span></p>
+		  <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+		  <p><strong>Email:</strong> <span id="email"></span></p>
+		  <p><strong>Blood Type:</strong> <span id="bloodType"></span></p>
+		</div> -->
+		<div class="appointments-container">
+			<h2>My Appointments:</h2>
+			<table id="appointments-table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Time</th>
+					</tr>
+				</thead>
+				<tbody id="appointments-body"></tbody>
+			</table>
+		</div>
 
 		<a href="edit.html"><button>Edit Account</button></a>
           
         <a href="file:///D:/Pt%20Facultate/AN%203%20SEM%202/LABS/PS/banca%20html/homepage/dist/index.html"><button class="delete-button">Delete Account</button></a>
 	</div>
+
+
+	<div id="pagination-container">
+        <button id="previous-page-btn">Previous</button>
+        <span id="current-page">1</span>
+        <button id="next-page-btn">Next</button>
+      </div>
+    </div>
+	  
 </body>
 
 </html>
